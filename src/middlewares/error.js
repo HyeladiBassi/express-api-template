@@ -28,7 +28,7 @@ export const errorHandler = (err, req, res, next) => {
   const response = error(null, message, statusCode);
   if (config.env === 'production' && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;
-    message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
+    message = httpStatus[statusCode];
   } else if (config.env === 'development') {
     response.stack = err.stack;
     Logger.error(err);

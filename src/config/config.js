@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import Joi from 'joi';
 
-dotenv.config({ path: `./.env` });
+dotenv.config({ path: process.env.NODE_ENV === 'development' ? `./.env.${process.env.NODE_ENV}` : `.env` });
 
 const envsSchema = Joi.object()
   .keys({
@@ -22,6 +22,8 @@ const envsSchema = Joi.object()
     SMTP_PASSWORD: Joi.string().description('password for email server'),
     SMTP_API_KEY: Joi.string().description('api key for email server'),
     EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
+    FB_DEFAULT_URL: Joi.string().description('firebase default url').required(),
+    ALLOWED_URL: Joi.string().description('allowed app url').required(),
   })
   .unknown();
 
@@ -41,4 +43,8 @@ export default {
     resetPasswordExpirationMinutes: envs.JWT_RESET_PASSWORD_EXPIRATION_MINUTES,
     verifyEmailExpirationMinutes: envs.JWT_VERIFY_EMAIL_EXPIRATION_MINUTES,
   },
+  fb: {
+    defaultUrl: envs.FB_DEFAULT_URL,
+  },
+  allowedUrl: envs.ALLOWED_URL,
 };

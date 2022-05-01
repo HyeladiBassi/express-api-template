@@ -1,4 +1,12 @@
-export function success(data = null, messages = null) {
+export function success(data = null, messages = null, isPaginated = false) {
+  if (isPaginated) {
+    return {
+      status: 'OK',
+      errors: null,
+      data: data.items,
+      pageInfo: data.pageInfo,
+    };
+  }
   return {
     status: 'OK',
     errors: null,
