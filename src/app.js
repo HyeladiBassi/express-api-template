@@ -80,6 +80,11 @@ app.use('/v1/auth', authLimiter);
 // Set Routes
 app.use(router);
 
+// Set Health Check route
+app.use(router.get('/health', (req, res, next) => {
+  res.send('Application is healthy')
+}))
+
 // Send back 404 error for any unknown api requests
 app.use((req, res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
