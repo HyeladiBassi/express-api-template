@@ -15,7 +15,7 @@
     "format": "prettier --write src"
   },
   "keywords": [],
-  "author": "Hyeladi",
+  "author": "Hyeladi Bassi",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime-corejs2": "^7.17.2",

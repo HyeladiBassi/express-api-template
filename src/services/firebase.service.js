@@ -20,17 +20,20 @@ export const createFbObject = async (ref, payload) => {
 };
 
 /**
- * Fetches an object from database reference based on query
+ * Fetches a single or multiple objects from database reference based on query
  * @param {Reference} ref
  * @param {object} query
  */
-export const getFbObjects = async (ref, query) => {
+export const getFbObjects = async (ref, query, single = false) => {
   try {
     const [entries] = Object.entries(query);
     const [key, value] = entries;
     const snapshot = await ref.orderByChild(key).equalTo(value).once('value');
-    const obj = snapshot.val() ? Object.values(snapshot.val()) : null;
-    return obj;
+    const obj = snapshot.exists() ? Object.values(snapshot.val()) : null;
+    if (single && obj) {
+      return obj[0]
+    }
+    return obj
   } catch (error) {
     logError(error);
     throw error;
@@ -44,7 +47,7 @@ export const getFbObjects = async (ref, query) => {
 export const getAllFbObjects = async (ref) => {
   try {
     const snapshot = await ref.once('value');
-    const objArray = snapshot.val() ? Object.values(snapshot.val()) : [];
+    const objArray = snapshot.exists() ? Object.values(snapshot.val()) : [];
     return objArray;
   } catch (error) {
     logError(error);
@@ -126,7 +129,7 @@ export const setFbObject = async (ref, query, payload) => {
     const [entries] = Object.entries(query);
     const [key, value] = entries;
     const snapshot = await ref.orderByChild(key).equalTo(value).once('value');
-    const obj = snapshot.val() ? Object.values(snapshot.val())[0] : null;
+    const obj = snapshot.exists() ? Object.values(snapshot.val())[0] : null;
     if (obj) {
       const id = Object.keys(obj)[0];
       ref.child(id).set(payload);

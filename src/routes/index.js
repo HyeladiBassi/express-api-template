@@ -1,5 +1,5 @@
 import express from 'express';
-import testRoutes from './test/test.routes';
+import testRoutes from '../controllers/test/test.routes';
 
 const router = express();
 

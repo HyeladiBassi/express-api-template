@@ -1,5 +1,7 @@
 import { Router } from 'express';
+import { authMid } from '../../middlewares/auth';
 import validate from '../../middlewares/validate';
+import { auth } from '../../validation/auth.validation';
 import {
   produce200,
   produce400,
@@ -9,9 +11,7 @@ import {
   produce500,
   produceAuthLogin,
   produceAuthRegister,
-} from '../../controllers/test/test.controller';
-import { auth } from '../../validation/auth.validation';
-import { authMid } from '../../middlewares/auth';
+} from './test.controller';
 
 export default () => {
   const testRoutes = Router();

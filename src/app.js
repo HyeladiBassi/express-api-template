@@ -47,6 +47,7 @@ app.use(middleware.handle(i18next));
 
 // Set security HTTP headers
 app.use(helmet());
+app.disable('x-powered-by');
 
 // Parse Json request body
 app.use(express.json());
