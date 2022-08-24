@@ -16,6 +16,7 @@ import { authLimiter, rateLimiter } from './middlewares/rateLimiter';
 import router from './routes';
 import ApiError from './utils/ApiError';
 import path from 'path';
+import { auditMiddleware } from './middlewares';
 
 const app = express();
 
@@ -77,13 +78,18 @@ passport.use('jwt', jwtStrategy);
 app.use(rateLimiter);
 app.use('/v1/auth', authLimiter);
 
+// Set Audit Middleware
+app.use(auditMiddleware);
+
 // Set Routes
 app.use(router);
 
 // Set Health Check route
-app.use(router.get('/health', (req, res, next) => {
-  res.send('Application is healthy')
-}))
+app.use(
+  router.get('/health', (req, res, next) => {
+    res.send('Application is healthy');
+  })
+);
 
 // Send back 404 error for any unknown api requests
 app.use((req, res, next) => {

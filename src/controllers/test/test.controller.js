@@ -1,7 +1,5 @@
 import { generateToken } from '../../services/token.service';
-import ApiError from '../../utils/ApiError';
-import catchAsync from '../../utils/catchAsync';
-import { success } from '../../utils/responseApi';
+import { ApiError, catchAsync, success } from '../../utils';
 
 export const produce200 = catchAsync(async (req, res) => {
   res.send(success());

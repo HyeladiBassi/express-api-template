@@ -13,4 +13,4 @@ const pick = (object, keys) => {
   }, {});
 };
 
-export default pick;
+export { pick };

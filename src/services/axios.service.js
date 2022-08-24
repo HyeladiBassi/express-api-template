@@ -1,5 +1,5 @@
 import { instance } from '../config/axios';
-import { logError } from '../utils/responseApi';
+import { logError } from '../utils';
 
 export const getDataFromPath = async () => {
   try {

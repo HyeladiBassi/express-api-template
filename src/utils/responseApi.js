@@ -1,4 +1,4 @@
-export function success(data = null, messages = null, isPaginated = false) {
+function success(data = null, messages = null, isPaginated = false) {
   if (isPaginated) {
     return {
       status: 'OK',
@@ -15,7 +15,7 @@ export function success(data = null, messages = null, isPaginated = false) {
   };
 }
 
-export function error(error, messages = null, status = 'ERR') {
+function error(error, messages = null, status = 'ERR') {
   return {
     status,
     errors: error,
@@ -24,7 +24,7 @@ export function error(error, messages = null, status = 'ERR') {
   };
 }
 
-export function logError(error) {
+function logError(error) {
   let obj;
   if (error.response) {
     // The request was made and the server responded with a status code
@@ -54,3 +54,5 @@ export function logError(error) {
   }
   console.log(obj);
 }
+
+export { success, error, logError };

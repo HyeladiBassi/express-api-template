@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { logError } from '../utils/responseApi';
+import { logError } from '../utils';
 
 /**
  * Creates a new object at database reference
@@ -31,9 +31,9 @@ export const getFbObjects = async (ref, query, single = false) => {
     const snapshot = await ref.orderByChild(key).equalTo(value).once('value');
     const obj = snapshot.exists() ? Object.values(snapshot.val()) : null;
     if (single && obj) {
-      return obj[0]
+      return obj[0];
     }
-    return obj
+    return obj;
   } catch (error) {
     logError(error);
     throw error;

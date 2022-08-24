@@ -43,6 +43,14 @@ export default {
     resetPasswordExpirationMinutes: envs.JWT_RESET_PASSWORD_EXPIRATION_MINUTES,
     verifyEmailExpirationMinutes: envs.JWT_VERIFY_EMAIL_EXPIRATION_MINUTES,
   },
+  smtp: {
+    host: envs.SMTP_HOST,
+    port: envs.SMTP_PORT,
+    username: envs.SMTP_USERNAME,
+    password: envs.SMTP_PASSWORD,
+    apiKey: envs.SMTP_API_KEY,
+    from: envs.EMAIL_FROM,
+  },
   fb: {
     defaultUrl: envs.FB_DEFAULT_URL,
   },

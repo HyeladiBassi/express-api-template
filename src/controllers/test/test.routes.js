@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { authMid } from '../../middlewares/auth';
-import validate from '../../middlewares/validate';
+import { authMid, validate } from '../../middlewares';
 import { auth } from '../../validation/auth.validation';
 import {
   produce200,

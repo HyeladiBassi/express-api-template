@@ -7,7 +7,7 @@ import { error } from '../utils/responseApi';
 /**
  * Converts all errors to instnaces of ApiError
  */
-export const errorConverter = (err, req, res, next) => {
+const errorConverter = (err, req, res, next) => {
   let error = err;
   if (!(error instanceof ApiError)) {
     const statusCode = error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
@@ -20,7 +20,7 @@ export const errorConverter = (err, req, res, next) => {
 /**
  * Catches all errors and returns a uniform error format
  */
-export const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
   let { statusCode, message } = err;
 
   res.locals.errorMessage = err.message;
@@ -35,3 +35,5 @@ export const errorHandler = (err, req, res, next) => {
   }
   res.status(statusCode).send(response);
 };
+
+export { errorConverter, errorHandler };

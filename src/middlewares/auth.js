@@ -23,7 +23,7 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   }
 };
 
-export const authMid =
+const authMid =
   (...requiredRights) =>
   async (req, res, next) => {
     return new Promise((resolve, reject) => {
@@ -32,3 +32,5 @@ export const authMid =
       .then(() => next())
       .catch((err) => next(err));
   };
+
+export { authMid };
